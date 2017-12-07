@@ -1,0 +1,7 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">  
+           
+         <style name="Theme.mytheme" parent="@style/Theme.AppCompat">   
+         	 <item name="colorPrimary">#FF8252</item>
+         	 <item type="bool" name="android:textAllCaps">false</item>
+         	 </style>      
+</resources>
