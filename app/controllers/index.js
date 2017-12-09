@@ -219,10 +219,14 @@ function createRowView(){
 }
 
 function createCategoryTileRow(i,arrayforViews) {
+
+var cartViewController = true;
+
+
 var cardLeft = screenWidth * 0.04;
-var cardRight = screenWidth * 0.06;
+var cardRight = screenWidth * 0.25;
 if(i%2 == 1){
-	cardLeft = screenWidth * 0.06;
+	cardLeft = screenWidth * 0.025;
 	cardRight = screenWidth * 0.04;
 }
 Ti.API.info("i === " + i + 'cardLeft====' + cardLeft + '  cardRight=====' + cardRight);
@@ -235,12 +239,14 @@ Ti.API.info("i === " + i + 'cardLeft====' + cardLeft + '  cardRight=====' + card
         // borderRadius:'5dp',
         layout: 'vertical',
         height: Ti.UI.SIZE,
-    	width: Ti.UI.SIZE
+    	width: screenWidth * 0.44
     });
     var view = Ti.UI.createView({
     	layout:'vertical',
     	height: Ti.UI.SIZE,
-    	width: Ti.UI.SIZE
+    	width: "90%",
+    	top: 10,
+    	bottom : 10
     });
         var titleLabel = Ti.UI.createLabel({
         color:'black',
@@ -251,11 +257,6 @@ Ti.API.info("i === " + i + 'cardLeft====' + cardLeft + '  cardRight=====' + card
         	fontSize: "16dp",
         	fontStyle: "bold"
         }
-    });
-        var priceView = Ti.UI.createView({
-    	layout:'horizontal',
-    	height: Ti.UI.SIZE,
-    	width: '38%'
     });
     var startingLabel = Ti.UI.createLabel({
         color:'#2F4F4F',
@@ -300,13 +301,7 @@ Ti.API.info("i === " + i + 'cardLeft====' + cardLeft + '  cardRight=====' + card
     anImageView.addEventListener('load', function() {
         Ti.API.info('Image loaded!');
     });
-    
-    // Add to the parent view.
-    view.add(anImageView);
-    view.add(titleLabel);
-   // priceView.add(startingLabel);
-   // priceView.add(currencyLabel);
-   // priceView.add(priceLabel);
+
 var originalPrice = arrayforViews.currency +" " +arrayforViews.original_price;
 var offerPrice = " " +arrayforViews.currency +" " +arrayforViews.offer_price;
 var discount = " " + "(" +arrayforViews.discount + ")";
@@ -337,14 +332,28 @@ var attrlabel = Ti.UI.createLabel({
     attributedString: attr,
     color:'#2F4F4F',
     font:{
-    	fontStyle: 'bold'
+    	fontStyle: 'semibold'
     },
     bottom: 5
 });
-
+     var addToCartButton = Titanium.UI.createButton({
+     	title: "ADD TO CART",
+     	backgroundColor:"white",
+     	color:"black",
+     	borderColor:"black",
+     	borderWidth:1,
+     	width: "100%"
+     });
+    
+	
+	// Add to the parent view.
+    view.add(anImageView);
+    view.add(titleLabel);
+	view.add(attrlabel);
+	view.add(addToCartButton);
+	
 	card.add(view);
-	card.add(priceView);
-	card.add(attrlabel);
+//	card.add(priceView);
 	//card.add(offerPriceLabel);
     return card;
 }
@@ -365,6 +374,7 @@ for (var i = 1; i <= arrayforViews.length; i++) {
      if(i==arrayforViews.length){
     	 row.bottom = 10;
      }
+
     rowView.add(row);
     scrollView.add(rowView);
 }
