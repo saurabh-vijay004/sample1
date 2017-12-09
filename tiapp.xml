@@ -1,107 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-	<id>com.sample1</id>
-	<name>sample1</name>
-	<version>1.0</version>
-	<publisher>User</publisher>
-	<url/>
-	<description/>
-	<copyright>2017 by User</copyright>
-	<icon>appicon.png</icon>
-	<fullscreen>false</fullscreen>
-	<navbar-hidden>false</navbar-hidden>
-	<analytics>true</analytics>
-	<guid>e6399ee9-9d37-4b3c-9fff-a03cd9650368</guid>
-	<property name="ti.ui.defaultunit" type="string">dp</property>
-	<property name="run-on-main-thread" type="bool">true</property>
-	<ios>
-		<enable-launch-screen-storyboard>true</enable-launch-screen-storyboard>
-		<use-app-thinning>true</use-app-thinning>
-		<plist>
-			<dict>
-				<key>UISupportedInterfaceOrientations~iphone</key>
-				<array>
-					<string>UIInterfaceOrientationPortrait</string>
-				</array>
-				<key>UISupportedInterfaceOrientations~ipad</key>
-				<array>
-					<string>UIInterfaceOrientationPortrait</string>
-					<string>UIInterfaceOrientationPortraitUpsideDown</string>
-					<string>UIInterfaceOrientationLandscapeLeft</string>
-					<string>UIInterfaceOrientationLandscapeRight</string>
-				</array>
-				<key>UIRequiresPersistentWiFi</key>
-				<false/>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-				<key>UIStatusBarHidden</key>
-				<false/>
-				<key>UIStatusBarStyle</key>
-				<string>UIStatusBarStyleDefault</string>
-			</dict>
-		</plist>
-	</ios>
-	<android xmlns:android="http://schemas.android.com/apk/res/android">
-		<manifest android:versionName="1.0" android:versionCode="1" package="com.sample1" xmlns:android="http://schemas.android.com/apk/res/android">
-			<uses-sdk android:targetSdkVersion="25" android:minSdkVersion="16"/>
-			<application android:resizeableActivity="true" android:theme="@style/Theme.AppCompat" android:debuggable="false" android:name="Sample1Application" android:label="sample1" android:icon="@drawable/appicon">
-				<activity android:theme="@style/Theme.Titanium" android:name=".Sample1Activity" android:label="@string/app_name" android:configChanges="keyboardHidden|orientation|fontScale|screenSize|smallestScreenSize|screenLayout|density">
-					<intent-filter>
-						<action android:name="android.intent.action.MAIN"/>
-						<category android:name="android.intent.category.LAUNCHER"/>
-					</intent-filter>
-				</activity>
-				<activity android:name="com.facebook.FacebookActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="YourAppName" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" />
-				<activity
-				android:name="com.facebook.CustomTabActivity"
-				android:exported="true">
-					<intent-filter>
-						<action android:name="android.intent.action.VIEW" />
-						<category android:name="android.intent.category.DEFAULT" />
-						<category android:name="android.intent.category.BROWSABLE" />
-						<data android:scheme="@string/fb_login_protocol_scheme" />
-					</intent-filter>
-				</activity>
-				<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-				<activity android:name="org.appcelerator.titanium.TiActivity" android:configChanges="keyboardHidden|orientation|fontScale|screenSize|smallestScreenSize|screenLayout|density"/>
-				<activity android:theme="@style/Theme.AppCompat.Translucent" android:name="org.appcelerator.titanium.TiTranslucentActivity" android:configChanges="keyboardHidden|orientation|fontScale|screenSize|smallestScreenSize|screenLayout|density"/>
-				<activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:configChanges="screenSize|density"/>
-				<provider android:name="org.appcelerator.titanium.io.TiFileProvider" android:grantUriPermissions="true" android:exported="false" android:authorities="com.sample1.tifileprovider"/>
-				<service android:name="com.appcelerator.aps.APSAnalyticsService" android:exported="false"/>
-			</application>
-			<uses-permission android:name="android.permission.INTERNET"/>
-			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-			<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
-			<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <id>com.sample1</id>
+    <name>sample1</name>
+    <version>1.0</version>
+    <publisher>User</publisher>
+    <url/>
+    <description/>
+    <copyright>2017 by User</copyright>
+    <icon>appicon.png</icon>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>e6399ee9-9d37-4b3c-9fff-a03cd9650368</guid>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
+    <property name="run-on-main-thread" type="bool">true</property>
+    <ios>
+        <enable-launch-screen-storyboard>true</enable-launch-screen-storyboard>
+        <use-app-thinning>true</use-app-thinning>
+        <plist>
+            <dict>
+                <key>UISupportedInterfaceOrientations~iphone</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                </array>
+                <key>UISupportedInterfaceOrientations~ipad</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
+                    <string>UIInterfaceOrientationLandscapeLeft</string>
+                    <string>UIInterfaceOrientationLandscapeRight</string>
+                </array>
+                <key>UIRequiresPersistentWiFi</key>
+                <false/>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+                <key>UIStatusBarHidden</key>
+                <false/>
+                <key>UIStatusBarStyle</key>
+                <string>UIStatusBarStyleDefault</string>
+            </dict>
+        </plist>
+    </ios>
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <manifest android:versionCode="1" android:versionName="1.0"
+            package="com.sample1" xmlns:android="http://schemas.android.com/apk/res/android">
+            <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="25"/>
+            <application android:debuggable="false"
+                android:icon="@drawable/appicon" android:label="sample1"
+                android:name="Sample1Application"
+                android:resizeableActivity="true" android:theme="@style/Theme.AppCompat">
+                <activity
+                    android:configChanges="keyboardHidden|orientation|fontScale|screenSize|smallestScreenSize|screenLayout|density"
+                    android:label="@string/app_name"
+                    android:name=".Sample1Activity" android:theme="@style/Theme.Titanium">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN"/>
+                        <category android:name="android.intent.category.LAUNCHER"/>
+                    </intent-filter>
+                </activity>
+                <activity
+                    android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                    android:label="YourAppName"
+                    android:name="com.facebook.FacebookActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+                <activity android:exported="true" android:name="com.facebook.CustomTabActivity">
+                    <intent-filter>
+                        <action android:name="android.intent.action.VIEW"/>
+                        <category android:name="android.intent.category.DEFAULT"/>
+                        <category android:name="android.intent.category.BROWSABLE"/>
+                        <data android:scheme="@string/fb_login_protocol_scheme"/>
+                    </intent-filter>
+                </activity>
+                <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation|fontScale|screenSize|smallestScreenSize|screenLayout|density" android:name="org.appcelerator.titanium.TiActivity"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation|fontScale|screenSize|smallestScreenSize|screenLayout|density"
+                    android:name="org.appcelerator.titanium.TiTranslucentActivity" android:theme="@style/Theme.AppCompat.Translucent"/>
+                <activity android:configChanges="screenSize|density" android:name="ti.modules.titanium.ui.android.TiPreferencesActivity"/>
+                <provider
+                    android:authorities="com.sample1.tifileprovider"
+                    android:exported="false"
+                    android:grantUriPermissions="true" android:name="org.appcelerator.titanium.io.TiFileProvider"/>
+                <service android:exported="false" android:name="com.appcelerator.aps.APSAnalyticsService"/>
+            </application>
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+            <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+            <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
             <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
-		</manifest>
-	</android>
-	<mobileweb>
-		<precache/>
-		<splash>
-			<enabled>true</enabled>
-			<inline-css-images>true</inline-css-images>
-		</splash>
-		<theme>default</theme>
-	</mobileweb>
-	<modules>
-		<module platform="android">facebook</module>
-		<module platform="android">ti.googlesignin</module>
-	</modules>
-	<deployment-targets>
-		<target device="iphone">false</target>
-		<target device="ipad">false</target>
-		<target device="android">true</target>
-		<target device="mobileweb">false</target>
-		<target device="windows">false</target>
-	</deployment-targets>
-	<sdk-version>6.3.0.GA</sdk-version>
-	<plugins>
-		<plugin version="1.0">ti.alloy</plugin>
-	</plugins>
-	<property name="appc-app-id" type="string">5a278118be73ac4a8edada40</property>
+        </manifest>
+    </android>
+    <modules>
+        <module platform="android">facebook</module>
+     <!--   <module platform="android">ti.googlesignin</module> -->
+    </modules>
+    <deployment-targets>
+        <target device="iphone">false</target>
+        <target device="ipad">false</target>
+        <target device="android">true</target>
+        <target device="windows">false</target>
+    </deployment-targets>
+    <sdk-version>7.0.0.GA</sdk-version>
+    <plugins>
+        <plugin version="1.0">ti.alloy</plugin>
+    </plugins>
+    <property name="appc-app-id" type="string">5a278118be73ac4a8edada40</property>
 </ti:app>

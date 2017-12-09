@@ -1,35 +1,85 @@
 
-function createRow(i) {
-    var card = Ti.UI.Android.createCardView({
-        contentPadding: 20,
-        cardCornerRadius: 10,
-        cardUseCompatPadding: true,
-        elevation: 5,
-        top: 10,
-        backgroundColor: "#ffffff",
-        borderColor:"#ff00ff",
-        borderWidth :5,
-        borderRadius:5
+
+//var arrayforViews = [{"img": "/instagram/bag.jpg","title":"Leather Bag","description":"a short description about product"},{"img": "/instagram/bag.jpg","title":"Duffle Bag","description":"a short description about product"},{"img": "/instagram/bag.jpg","title":"Bag","description":"a short description about product"}];
+var arrayforViews = [{"img": "/instagram/bag.jpg","title":"Leather Bag","description":"STARTING FROM", "price":"439", "currency":"AED","original_price":"300","offer_price":"270","discount":"10%"},
+{"img": "/instagram/bag.jpg","title":"Duffle Bag","description":"STARTING FROM", "price":"439", "currency":"AED","original_price":"300","offer_price":"270","discount":"10%"},
+{"img": "/instagram/bag.jpg","title":"Bag","description":"STARTING FROM", "price":"439", "currency":"AED","original_price":"300","offer_price":"270","discount":"10%"},
+{"img": "/instagram/bag.jpg","title":"Bag","description":"STARTING FROM", "price":"439", "currency":"AED","original_price":"300","offer_price":"270","discount":"10%"},
+{"img": "/instagram/bag.jpg","title":"Bag","description":"STARTING FROM", "price":"439", "currency":"AED","original_price":"300","offer_price":"270","discount":"10%"}];
+
+//fetch the  height of the screen
+var screenHeight = Ti.Platform.displayCaps.platformHeight;
+ 
+//fetch the  width of the screen
+var screenWidth = Ti.Platform.displayCaps.platformWidth;
+if(Ti.Platform.osname === 'android'){
+	screenWidth = Ti.Platform.displayCaps.xdpi;
+}
+
+Ti.API.info('Ti.Platform.displayCaps.density: ' + Ti.Platform.displayCaps.density);
+Ti.API.info('Ti.Platform.displayCaps.dpi: ' + Ti.Platform.displayCaps.dpi);
+Ti.API.info('Ti.Platform.displayCaps.platformHeight: ' + Ti.Platform.displayCaps.platformHeight);
+Ti.API.info('Ti.Platform.displayCaps.platformWidth: ' + Ti.Platform.displayCaps.platformWidth);
+if((Ti.Platform.osname === 'iphone')||(Ti.Platform.osname === 'ipad')||(Ti.Platform.osname === 'android')){
+  Ti.API.info('Ti.Platform.displayCaps.logicalDensityFactor: ' + Ti.Platform.displayCaps.logicalDensityFactor);
+}
+if(Ti.Platform.osname === 'android'){
+  Ti.API.info('Ti.Platform.displayCaps.xdpi: ' + Ti.Platform.displayCaps.xdpi);
+  Ti.API.info('Ti.Platform.displayCaps.ydpi: ' + Ti.Platform.displayCaps.ydpi);
+}
+
+
+/*
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////       Banner View      /////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function createBannerRow(i,arrayforViews) {
+    var card = Ti.UI.createView({
+        left: "10dp",
+        right: "10dp",
+        top: '10dp',
+        borderColor:"#000000",
+        borderWidth :'1dp',
+        // borderRadius:'5dp',
+        layout: 'vertical',
+        height: Ti.UI.SIZE,
+    	width: Ti.UI.FILL
     });
     var view = Ti.UI.createView({
     	layout:'vertical',
     	height: Ti.UI.SIZE,
     	width: Ti.UI.SIZE
     });
+    
+        var titleLabel = Ti.UI.createLabel({
+        color:'black',
+        text: arrayforViews.title,
+        bottom: '10dp',
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        font:{
+        	fontSize: "20dp",
+        	fontStyle: "bold"
+        }
+    });
+    
     var label = Ti.UI.createLabel({
         color:'black',
-        text: 'A long',
-        bottom: '10dp'
+        text: arrayforViews.description,
+        bottom: '10dp',
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+  		font:{
+        	//fontSize: "20dp",
+        	fontStyle: "semibold"
+        }
     });
+    Ti.API.log(arrayforViews.img);
     // Create an ImageView.
     var anImageView = Ti.UI.createImageView({
-        image : '/instagram/instagram.png',
-        width : '25dp',
-        height : '30dp',
-        top : '30dp',
+        image : arrayforViews.img,
+       //	url:arrayforViews.img,
+        width : Ti.UI.FILL,
+        height : '200dp',
         bottom : '10dp',
-        right : '20dp',
-        left : '20dp'
     });
     anImageView.addEventListener('load', function() {
         Ti.API.info('Image loaded!');
@@ -37,25 +87,290 @@ function createRow(i) {
     
     // Add to the parent view.
     view.add(anImageView);
-    
+    view.add(titleLabel);
     view.add(label);
 
 	card.add(view);
 
     return card;
 }
+*/
+/*
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////      TILEVIEW       ///////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function createRowView(){
+ var rowView = Ti.UI.createView({
+    	layout:'horizontal',
+    	height: Ti.UI.SIZE,
+    	width: screenWidth,
+    	top: screenWidth * 0.06
+    });
+	return rowView;
+}
+
+function createTileRow(i,arrayforViews) {
+var cardLeft = screenWidth * 0.04;
+var cardRight = screenWidth * 0.06;
+if(i%2 == 1){
+	cardLeft = screenWidth * 0.06;
+	cardRight = screenWidth * 0.04;
+}
+Ti.API.info("i === " + i + 'cardLeft====' + cardLeft + '  cardRight=====' + cardRight);
+    var card = Ti.UI.createView({
+        left: cardLeft,
+        right: cardRight,
+        top: '10dp',
+        borderColor:"#000",
+        borderWidth :'1dp',
+        // borderRadius:'5dp',
+        layout: 'vertical',
+        height: Ti.UI.SIZE,
+    	width: Ti.UI.SIZE
+    });
+    var view = Ti.UI.createView({
+    	layout:'vertical',
+    	height: Ti.UI.SIZE,
+    	width: Ti.UI.SIZE
+    });
+        var titleLabel = Ti.UI.createLabel({
+        color:'black',
+        text: arrayforViews.title,
+        width : screenWidth * 0.35,
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        font:{
+        	fontSize: "16dp",
+        	fontStyle: "bold"
+        }
+    });
+        var priceView = Ti.UI.createView({
+    	layout:'horizontal',
+    	height: Ti.UI.SIZE,
+    	width: '38%'
+    });
+    var startingLabel = Ti.UI.createLabel({
+        color:'#c0c0c0',
+        text: arrayforViews.description,
+        right: '5dp',
+       // width : screenWidth * 0.35,
+  		font:{
+        	fontSize: "12dp",
+        	fontStyle: "semibold"
+        }
+    });
+    var currencyLabel = Ti.UI.createLabel({
+        color:'red',
+        text: arrayforViews.currency,
+     //   width : screenWidth * 0.35,
+       // textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+  		font:{
+        	fontSize: "12dp",
+        	fontStyle: "bold"
+        }
+    });
+    var priceLabel = Ti.UI.createLabel({
+        color:'Red',
+        text: arrayforViews.price,
+        //left: '5dp',
+    //    width : screenWidth * 0.35,
+       // textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+  		font:{
+        	fontSize: "12dp",
+        	fontStyle: "bold"
+        }
+    });
+  
+    // Create an ImageView.
+    var anImageView = Ti.UI.createImageView({
+        image : arrayforViews.img,
+       //	url:arrayforViews.img,
+        width : screenWidth * 0.40,
+        height : '200dp',
+        bottom : '10dp',
+    });
+    anImageView.addEventListener('load', function() {
+        Ti.API.info('Image loaded!');
+    });
+    
+    // Add to the parent view.
+    view.add(anImageView);
+    view.add(titleLabel);
+    priceView.add(startingLabel);
+    priceView.add(currencyLabel);
+    priceView.add(priceLabel);
+
+	card.add(view);
+	card.add(priceView);
+
+    return card;
+}*/
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////      CATEGORYTILEVIEW       ////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function createRowView(){
+ var rowView = Ti.UI.createView({
+    	layout:'horizontal',
+    	height: Ti.UI.SIZE,
+    	width: screenWidth,
+    	top: screenWidth * 0.06
+    });
+	return rowView;
+}
+
+function createCategoryTileRow(i,arrayforViews) {
+var cardLeft = screenWidth * 0.04;
+var cardRight = screenWidth * 0.06;
+if(i%2 == 1){
+	cardLeft = screenWidth * 0.06;
+	cardRight = screenWidth * 0.04;
+}
+Ti.API.info("i === " + i + 'cardLeft====' + cardLeft + '  cardRight=====' + cardRight);
+    var card = Ti.UI.createView({
+        left: cardLeft,
+        right: cardRight,
+        top: '10dp',
+        borderColor:"#000",
+        borderWidth :'1dp',
+        // borderRadius:'5dp',
+        layout: 'vertical',
+        height: Ti.UI.SIZE,
+    	width: Ti.UI.SIZE
+    });
+    var view = Ti.UI.createView({
+    	layout:'vertical',
+    	height: Ti.UI.SIZE,
+    	width: Ti.UI.SIZE
+    });
+        var titleLabel = Ti.UI.createLabel({
+        color:'black',
+        text: arrayforViews.title,
+        width : screenWidth * 0.35,
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        font:{
+        	fontSize: "16dp",
+        	fontStyle: "bold"
+        }
+    });
+        var priceView = Ti.UI.createView({
+    	layout:'horizontal',
+    	height: Ti.UI.SIZE,
+    	width: '38%'
+    });
+    var startingLabel = Ti.UI.createLabel({
+        color:'#2F4F4F',
+        text: arrayforViews.description,
+        right: '5dp',
+       // width : screenWidth * 0.35,
+  		font:{
+        	fontSize: "12dp",
+        	fontStyle: "semibold"
+        }
+    });
+    var currencyLabel = Ti.UI.createLabel({
+        color:'red',
+        text: arrayforViews.currency,
+     //   width : screenWidth * 0.35,
+       // textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+  		font:{
+        	fontSize: "12dp",
+        	fontStyle: "bold"
+        }
+    });
+    var priceLabel = Ti.UI.createLabel({
+        color:'Red',
+        text: arrayforViews.price,
+        //left: '5dp',
+    //    width : screenWidth * 0.35,
+       // textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+  		font:{
+        	fontSize: "12dp",
+        	fontStyle: "bold"
+        }
+    });
+  
+    // Create an ImageView.
+    var anImageView = Ti.UI.createImageView({
+        image : arrayforViews.img,
+       //	url:arrayforViews.img,
+        width : screenWidth * 0.40,
+        height : '200dp',
+        bottom : '10dp',
+    });
+    anImageView.addEventListener('load', function() {
+        Ti.API.info('Image loaded!');
+    });
+    
+    // Add to the parent view.
+    view.add(anImageView);
+    view.add(titleLabel);
+   // priceView.add(startingLabel);
+   // priceView.add(currencyLabel);
+   // priceView.add(priceLabel);
+var originalPrice = arrayforViews.currency +" " +arrayforViews.original_price;
+var offerPrice = " " +arrayforViews.currency +" " +arrayforViews.offer_price;
+var discount = " " + "(" +arrayforViews.discount + ")";
+var text = originalPrice + " " + offerPrice + discount;
+var attr = Ti.UI.createAttributedString({
+    text: text,
+    attributes: [
+        {
+            type: Ti.UI.ATTRIBUTE_STRIKETHROUGH_STYLE,
+            value: "#2F4F4F",
+            range: [text.indexOf(originalPrice), (originalPrice).length]
+        },
+        {
+        	type: Titanium.UI.ATTRIBUTE_FOREGROUND_COLOR,
+            value: "red",
+            range: [text.indexOf(offerPrice),  (offerPrice).length]
+        }
+        ,
+        {
+        	type: Titanium.UI.ATTRIBUTE_FOREGROUND_COLOR,
+            value: "#2F4F4F",
+            range: [text.indexOf(discount),  (discount).length]
+        }
+    ]
+});
+ 
+var attrlabel = Ti.UI.createLabel({
+    attributedString: attr,
+    color:'#2F4F4F',
+    font:{
+    	fontStyle: 'bold'
+    },
+    bottom: 5
+});
+
+	card.add(view);
+	card.add(priceView);
+	card.add(attrlabel);
+	//card.add(offerPriceLabel);
+    return card;
+}
 
 var scrollView = Ti.UI.createScrollView({
     layout: 'vertical',
+    scrollType: 'vertical'
 });
 
-for (var i = 0; i <= 20; i++) {
-    var row = createRow(i);
-    scrollView.add(row);
+Ti.API.info(arrayforViews.length + " -- " + JSON.stringify(arrayforViews));
+for (var i = 1; i <= arrayforViews.length; i++) {
+    // var row = createBannerRow(i,arrayforViews[i]);
+   
+    if(i%2 == 1){
+    	var rowView = createRowView();
+    }
+    var row = createCategoryTileRow(i,arrayforViews[i-1]);
+     if(i==arrayforViews.length){
+    	 row.bottom = 10;
+     }
+    rowView.add(row);
+    scrollView.add(rowView);
 }
-//$.myWin.add(scrollView);
+$.myWin.add(scrollView);
 $.myWin.open();
-
+/*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////Facebook Login/////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -231,3 +546,4 @@ btn.addEventListener('click', function() {
 
 $.myWin.add(btn);
 $.myWin.open();
+*/
