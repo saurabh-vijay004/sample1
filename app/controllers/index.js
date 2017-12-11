@@ -220,14 +220,14 @@ function createRowView(){
 
 function createCategoryTileRow(i,arrayforViews) {
 
-var cartViewController = true;
+var categoryListingViewController = true;
 
 
-var cardLeft = screenWidth * 0.04;
-var cardRight = screenWidth * 0.25;
+var cardLeft = screenWidth * 0.025;
+var cardRight = screenWidth * 0.025;
 if(i%2 == 1){
 	cardLeft = screenWidth * 0.025;
-	cardRight = screenWidth * 0.04;
+	cardRight = screenWidth * 0.025;
 }
 Ti.API.info("i === " + i + 'cardLeft====' + cardLeft + '  cardRight=====' + cardRight);
     var card = Ti.UI.createView({
@@ -336,6 +336,7 @@ var attrlabel = Ti.UI.createLabel({
     },
     bottom: 5
 });
+ 
      var addToCartButton = Titanium.UI.createButton({
      	title: "ADD TO CART",
      	backgroundColor:"white",
@@ -350,8 +351,9 @@ var attrlabel = Ti.UI.createLabel({
     view.add(anImageView);
     view.add(titleLabel);
 	view.add(attrlabel);
-	view.add(addToCartButton);
-	
+	if(categoryListingViewController){
+		view.add(addToCartButton);
+	}
 	card.add(view);
 //	card.add(priceView);
 	//card.add(offerPriceLabel);
