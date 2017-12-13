@@ -1,6 +1,7 @@
 <Alloy>
 	<Window class="container" id="myWin">
 		<!-- <Label id="label" onClick="doClick">Hello, World</Label> -->
-	
+		<!--  use below widget for banner -->
+		<!-- <Widget id="scrollableView" src="au.jkotchoff.scrollableView" height="200" pagingControlBelow="false" pagingControlDotImage="/instagram/paging_control_dot.png" pagingControlBackgroundColor="#00000000"/> -->
 	</Window>
 </Alloy>

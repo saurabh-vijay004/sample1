@@ -7,6 +7,10 @@ var arrayforViews = [{"img": "/instagram/bag.jpg","title":"Leather Bag","descrip
 {"img": "/instagram/bag.jpg","title":"Bag","description":"STARTING FROM", "price":"439", "currency":"AED","original_price":"300","offer_price":"270","discount":"10%"},
 {"img": "/instagram/bag.jpg","title":"Bag","description":"STARTING FROM", "price":"439", "currency":"AED","original_price":"300","offer_price":"270","discount":"10%"}];
 
+var b = {"Status":1,"Cart":[{"CartItemId":124112,"ProductId":49648,"ProductName":"Teal Anarkali","StockStatus":1,"StockLabel":"In Stock","ProductPrice":625,"ProductImage":"http:\/\/www.globusfashion.com\/media\/catalog\/product\/cache\/1\/image\/600x600\/040ec09b1e35df139433887a97daa66f\/s\/1\/s16siwk858-teal-1.jpg","ProductQty":1,"TotalPrice":625,"SubTotal":1184,"Currency":"Rs","Options":[{"option_title":"Size","option_value":"S","option_id":"347","VarientAttributeId":"977"}]},
+							{"CartItemId":124296,"ProductId":54742,"ProductName":"Black Crop Top","StockStatus":1,"StockLabel":"In Stock","ProductPrice":559,"ProductImage":"http:\/\/www.globusfashion.com\/media\/catalog\/product\/cache\/1\/image\/600x600\/040ec09b1e35df139433887a97daa66f\/w\/1\/w16cwt170-black-2.jpg","ProductQty":1,"TotalPrice":559,"SubTotal":1184,"Currency":"Rs","Options":[{"option_title":"Size","option_value":"M","option_id":"134","VarientAttributeId":"977"}]}],
+							"Totals":{"SubTotal":1184,"GrandTotal":1184,"CurrencySymbol":"Rs"},"CartQty":2}
+
 //fetch the  height of the screen
 var screenHeight = Ti.Platform.displayCaps.platformHeight;
  
@@ -14,6 +18,7 @@ var screenHeight = Ti.Platform.displayCaps.platformHeight;
 var screenWidth = Ti.Platform.displayCaps.platformWidth;
 if(Ti.Platform.osname === 'android'){
 	screenWidth = Ti.Platform.displayCaps.xdpi;
+	screenHeight = Ti.Platform.displayCaps.ydpi;
 }
 
 Ti.API.info('Ti.Platform.displayCaps.density: ' + Ti.Platform.displayCaps.density);
@@ -204,7 +209,7 @@ Ti.API.info("i === " + i + 'cardLeft====' + cardLeft + '  cardRight=====' + card
 
     return card;
 }*/
-
+/*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////      CATEGORYTILEVIEW       ////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -359,32 +364,276 @@ var attrlabel = Ti.UI.createLabel({
 	//card.add(offerPriceLabel);
     return card;
 }
+*/
 
+
+/*
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////       Cart View  row    /////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function createCartViewRow(i,arrayforViews) {
+    var card = Ti.UI.createView({
+        // left: "10dp",
+        // right: "10dp",
+        top: '10dp',
+        borderColor:"#000000",
+        borderWidth :'1dp',
+        // borderRadius:'5dp',
+        layout: 'vertical',
+        height: screenHeight * 0.425,
+    	width: screenWidth * 0.90,
+    });
+    var view = Ti.UI.createView({
+    	layout:'horizontal',
+    	height: card.height * 0.90,
+    	width: card.width * 0.95,
+    	top: card.width * 0.02,
+    	bottom: card.width * 0.02,
+    });
+    
+        var anImageView = Ti.UI.createImageView({
+        image : arrayforViews.ProductImage,
+       	url:arrayforViews.ProductImage,
+        width : view.height,
+        height : view.height,
+        top : 0,
+        left :0,
+    });
+    anImageView.addEventListener('load', function() {
+        Ti.API.info('Image loaded!');
+    });
+    
+    view.add(anImageView);
+    
+        var detailView = Ti.UI.createView({
+    	layout:'vertical',
+    	height: "100%",
+    	width: view.width * 0.4,
+    	top:0,
+    	left:"5dp"
+    });
+    
+        var titleLabel = Ti.UI.createLabel({
+        color:'black',
+        text: arrayforViews.ProductName,
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+        font:{
+        	fontSize: "18dp",
+        	fontStyle: "semibold"
+        },
+        height: Ti.UI.SIZE,
+        top:0,
+        left:0,
+        maxLines:2,
+        ellipsize : Titanium.UI.TEXT_ELLIPSIZE_TRUNCATE_END
+    });
+    
+    var skuLabel = Ti.UI.createLabel({
+        color:'#2F4F4F',
+        text: "SKU: " + arrayforViews.ProductId, 
+        height: Ti.UI.SIZE,
+        top:0,
+        left:0,
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+  		font:{
+        	fontSize: "14dp",
+        	fontStyle: "semibold"
+      	},
+      	maxLines: 1,
+        ellipsize : Titanium.UI.TEXT_ELLIPSIZE_TRUNCATE_END
+    });
+    
+    var qtyView = Ti.UI.createView({
+    	layout:'horizontal',
+    	height: Ti.UI.SIZE,
+    	width: "100%",
+    });
+    
+    var qtyLabel = Ti.UI.createLabel({
+        color:'black',
+        text: "QTY: " + arrayforViews.ProductQty, 
+        height: Ti.UI.SIZE,
+        top:0,
+        left:0,
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+  		font:{
+        	fontSize: "16dp",
+        	fontStyle: "semibold"
+      	},
+      	maxLines: 1,
+        ellipsize : Titanium.UI.TEXT_ELLIPSIZE_TRUNCATE_END
+    });
+    
+    qtyView.add(qtyLabel);
+
+    var priceLabel = Ti.UI.createLabel({
+        color:'red',
+        text: arrayforViews.Currency +" " + arrayforViews.ProductPrice, 
+        height: Ti.UI.SIZE,
+        top:0,
+        left:0,
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+  		font:{
+        	fontSize: "18dp",
+        	fontStyle: "bold"
+      	},
+      	maxLines: 1,
+        ellipsize : Titanium.UI.TEXT_ELLIPSIZE_TRUNCATE_END
+    });    
+        // Add to the parent view.
+   
+    detailView.add(titleLabel);
+    detailView.add(skuLabel);
+	detailView.add(qtyView);
+	detailView.add(priceLabel);
+	view.add(detailView);
+    
+      
+    Ti.API.log(arrayforViews.ProductImage); 
+    // Create an ImageView.
+    var width = view.width * 0.3;
+
+      var deleteWishlistView = Ti.UI.createView({
+    	layout:'vertical',
+    	height: "100%",
+    	width: "12%",
+    	backgroundColor:"#fff",
+    	top:0,
+    	right:0
+    });
+	    var wishlistView = Ti.UI.createView({
+    	layout:'vertical',
+    	height: "50%",
+    	width: "100%",
+    	top:0,
+    	right:0
+    });
+	var wishlistImageView = Ti.UI.createImageView({
+		image : "/instagram/favorite.png",
+		//	url:arrayforViews.img,
+		width : '24dp',
+		height : '24dp',
+		top : '5dp',
+		right : 0
+	});
+	wishlistImageView.addEventListener('click', function() {
+		Ti.API.info('wishlist clicked!');
+	});
+	
+	wishlistView.add(wishlistImageView);
+	
+	    var deleteView = Ti.UI.createView({
+    	height: '50%',
+    	width: "100%",
+    	bottom:0,
+    	right:0
+    });
+	
+	
+	var deleteImageView = Ti.UI.createImageView({
+		image : "/instagram/delete.png",
+		//	url:arrayforViews.img,
+		width : '24dp',
+		height : '24dp',
+		bottom : 0,
+		right : 0
+	});
+	deleteImageView.addEventListener('click', function() {
+		Ti.API.info('delete clicked!');
+	});
+	
+	deleteView.add(deleteImageView);
+	
+	deleteWishlistView.add(wishlistView);
+	deleteWishlistView.add(deleteView);
+        
+
+	view.add(deleteWishlistView);
+	card.add(view);
+    return card;
+}
+*/
 var scrollView = Ti.UI.createScrollView({
     layout: 'vertical',
     scrollType: 'vertical'
 });
 
-Ti.API.info(arrayforViews.length + " -- " + JSON.stringify(arrayforViews));
+Ti.API.info(arrayforViews.length + " -- " + b.Status+ "---" +JSON.stringify(b.Cart));
+
+var cartItemsArray = b.Cart;
+Ti.API.info(cartItemsArray.length + " ----  " + cartItemsArray);
+/* For Cart View
+for (var i = 0; i <= cartItemsArray.length -1; i++) {
+    var row = createCartViewRow(i,cartItemsArray[i]);
+     if(i==cartItemsArray.length){
+    	 row.bottom = 10;
+     }
+    scrollView.add(row);
+}
+*/
+/*
 for (var i = 1; i <= arrayforViews.length; i++) {
     // var row = createBannerRow(i,arrayforViews[i]);
    
-    if(i%2 == 1){
-    	var rowView = createRowView();
-    }
-    var row = createCategoryTileRow(i,arrayforViews[i-1]);
+    // if(i%2 == 1){
+    	// var rowView = createRowView();
+    // }
+    var row = createCartViewRow(i,arrayforViews[i-1]);
      if(i==arrayforViews.length){
     	 row.bottom = 10;
      }
 
-    rowView.add(row);
-    scrollView.add(rowView);
+ //   rowView.add(row);
+    scrollView.add(row);
 }
-$.myWin.add(scrollView);
+*/
+//$.myWin.add(scrollView);
+/*
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////      Banner Slider        ///////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+var Banners = [{"Id":5,"Title":"Sale Flat 50%","ImageUrl":"http:\/\/www.globusfashion.com\/media\/mobileapp\/banners\/SS17-Facebook-size-Banner.jpg","Type":"1","ElementId":"345"},
+{"Id":5,"Title":"Sale Flat 50%","ImageUrl":"http:\/\/www.globusfashion.com\/media\/mobileapp\/banners\/SS17-Facebook-size-Banner.jpg","Type":"1","ElementId":"345"}];
+
+function createBannerRow(i,bannerArray){
+
+var subBannerView = Ti.UI.createView({
+	height : screenWidth,
+	width: screenWidth,
+});
+
+// Create an ImageView.
+var anImageView = Ti.UI.createImageView({
+	image : bannerArray.ImageUrl,
+	width : screenWidth,
+	height :screenWidth,
+	top : 0,
+	left : 0
+});
+anImageView.addEventListener('load', function() {
+	Ti.API.info('Image loaded!');
+});
+// Add to the parent view.
+subBannerView.add(anImageView);
+return subBannerView;
+}
+
+Ti.API.info("Banners.length" +" --- "+ Banners.length);
+var bannerViews = [];
+for (var i = 0; i <= Banners.length -1; i++) {
+    var row = createBannerRow(i,Banners[i]);
+    bannerViews.push(row);
+    Ti.API.info(JSON.stringify(bannerViews));
+}
+$.scrollableView.setViews(bannerViews);
+*/
+//$.myWin.add(bannerSlider);
 $.myWin.open();
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////Facebook Login/////////////////////////////////////////////////////////////////////
+//////////////////////////////////      Facebook Login          ///////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var fb = require('facebook');
